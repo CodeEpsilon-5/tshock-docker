@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  tshock:
+    image: codeepsilon5/tshock:${VERSION:?VERSION Variable not set!}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - TSHOCK_VERSION=${VERSION:?VERSION Variable not set!}
+    environment:
+      - AUTOCREATE
+      - WORLDNAME
+      - DIFFICULTY
+      - MAXPLAYERS
+      - MOTD
+      - LANGUAGE
+      - PASSWORD
+    volumes:
+      - ./worlds:/var/terraria/worlds
+      - ./tshock:/var/terraria/tshock
+      - ./plugins:/tshock/ServerPlugins
+    ports:
+      - 7777:7777
+      - 7778:7778
